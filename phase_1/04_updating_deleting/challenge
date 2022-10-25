@@ -1,0 +1,6 @@
+-- Delete the album with ID 12.
+
+-- Use a SELECT query to get the list of albums and verify that one has been deleted.
+
+SELECT * FROM albums;
+DELETE FROM albums WHERE id = '12';

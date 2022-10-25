@@ -1,0 +1,11 @@
+-- Insert a new artist of your choice, and a new album related to that artist (here's an idea, if you can't pick one).
+
+-- Then run a SELECT query to check the new artist is now in the table.
+
+INSERT INTO artists 
+( name, genre )
+VALUES( 'Placebo', 'Alternative' );
+
+INSERT INTO albums 
+( title, release_year, artist_id )
+VALUES( 'Placebo', '1996', '6' );

@@ -1,0 +1,1 @@
+SELECT title FROM albums WHERE artist_id = 1 AND release_year >= 1980 AND release_year <= 1990;
