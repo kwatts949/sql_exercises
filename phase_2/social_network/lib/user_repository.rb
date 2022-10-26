@@ -1,34 +1,51 @@
+require_relative './users'
+
 class UserRepository
   def all
-  sql = 'SELECT id, username, email_address FROM users;'
-  result_set = DatabaseConnection.exec_params(sql, [])
+    sql = 'SELECT id, username, email_address FROM users;'
+    result_set = DatabaseConnection.exec_params(sql, [])
 
-  users = []
+    users = []
 
     result_set.each do |record|
       user = User.new
       user.id = record['id']
       user.username = record['username']
       user.email_address = record['email_address']
+
       users << user
     end
-  return users
+    return users
   end
-end
-=begin
-  # Gets a single record by its ID
-  # One argument: the id (number)
+
   def find(id)
-    # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    sql = 'SELECT id, username, email_address FROM users WHERE id = $1;'
+    sql_params = [id]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
 
-    # Returns a single Student object.
+    record = result_set[0]
+
+    user = User.new
+    user.id = record['id']
+    user.username = record['username']
+    user.email_address = record['email_address']
+
+    return user
   end
 
-  def create
+  def create(user)
+    sql = 'INSERT INTO users (username, email_address) VALUES ($1, $2);'
+    sql_params = [user.username, user.email_address]
+
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+    
+    return nil
   end
 
-  def delete
+  def delete(id)
+    sql = 'DELETE FROM users WHERE id = $1;'
+    sql_params = [id]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+  return nil
   end
 end
-=end
